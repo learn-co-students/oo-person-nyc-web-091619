@@ -1,12 +1,23 @@
 # your code goes here
+require "pry"
+
 class Person
-    attr_reader :name
-    attr_accessor :bank_account, :hygiene, :happiness
+    attr_reader :name, :hygiene, :happiness
+    attr_accessor :bank_account
+
     def initialize(name)
         @name = name
         @happiness = 8
         @hygiene = 8
         @bank_account = 25
+    end
+
+    def hygiene=(num)
+        num >= 0 ? (num <= 10? @hygiene = num : @hygiene = 10) : @hygiene = 0
+    end
+
+    def happiness=(num)
+        num >= 0 ? (num <= 10? @happiness = num : @happiness = 10) : @happiness = 0
     end
 
     def clean?
@@ -23,10 +34,20 @@ class Person
     end
 
     def take_bath
-        @hygiene += 4
-        @hygiene > 10 ? @hygiene = 10 : @hygiene
+        self.hygiene += 4 
         "♪ Rub-a-dub just relaxing in the tub ♫"
     end
 
+    def work_out
+        self.hygiene -= 3
+        self.happiness += 2
+        '♪ another one bites the dust ♫'
+    end
+
+    def call_friend(friend)
+        self.happiness += 3
+        friend.happiness += 3
+        "Hi #{friend.name}! It's #{@name}. How are you?"
+    end
 
 end
